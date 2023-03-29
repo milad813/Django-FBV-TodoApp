@@ -7,7 +7,43 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
+from rest_framework import viewsets
 
+
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+    
+    # def list(self, request):
+    #     serializer = self.serializer_class(self.queryset, many=True)
+    #     return Response(serializer.data)
+    
+    # def create(self, request):
+    #     serializer = self.serializer_class(request.data)
+    #     serializer.save()
+    #     return Response(serializer.data)
+    
+    # def update(self, request, pk=None):
+    #     task=self.queryset.get(pk=pk)
+    #     serializer = self.serializer_class(task, data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response(serializer.data)
+    
+    # def retrieve(self, request, pk=None):
+    #     task_detail = self.queryset.get(pk=pk)
+    #     serializer = self.serializer_class(task_detail)
+    #     return Response(serializer.data)
+    
+    # def destroy(self, request, pk=None):
+    #     task = self.queryset.get(pk=pk)
+    #     task.delete()
+    #     return Response({'Item deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    
+    
+    
 
 
 class TaskList(ListCreateAPIView):
